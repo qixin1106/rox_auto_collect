@@ -25,12 +25,13 @@
 首先，将本项目克隆到您的本地电脑。
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/qixin1106/rox_auto_collect
+cd rox_auto_collect
 ```
 
 ### 2. 创建并激活 Conda 环境
 使用 Conda 创建一个独立的 Python 3.10 虚拟环境，以避免与其他项目产生依赖冲突。
+请自行查阅如何安装`miniconda`
 
 ```bash
 # 创建一个名为 rox_auto 的 python3.10 环境
@@ -46,6 +47,8 @@ conda activate rox_auto
 ​**​重要提示：**​​ 由于 macOS 不支持 NVIDIA 的 CUDA，我们必须安装 CPU 版本的 PaddlePaddle。
 
 ```bash
+# 方式1
+# ----- 手动安装方式 -------
 # 1. 安装 PaddlePaddle (CPU 版本)
 # 使用官方推荐的国内源进行安装，速度更快
 python -m pip install paddlepaddle==3.0.0 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
@@ -57,6 +60,14 @@ pip install paddleocr
 pip install pyautogui
 ```
 
+```bash
+# 方式2
+# ----- 配置安装方式 ------
+pip install -r requirements.txt
+```
+
+> **以上两种任选一个即可**
+
 关于国内镜像： 如果您在安装 paddleocr 或 pyautogui 时遇到下载速度过慢的问题，可以指定使用国内的 pip 镜像源，例如清华大学源：
 
 ## 使用方法
@@ -67,9 +78,10 @@ pip install pyautogui
 
 前往 ​**​系统设置** > **隐私与安全性** > **屏幕录制**​​
 将您用于运行此脚本的应用程序（例如 终端、iTerm2 或 Visual Studio Code）添加到允许列表中
-(您可以在此替换为自己的权限设置截图)
 
 如果您不授予此权限，脚本将在尝试截图时失败并报错。
+
+此外，还需要授权 ​**​系统设置** > **隐私与安全性** > **辅助功能**
 
 ### 2. 运行脚本
 完成所有设置后，确保游戏窗口是打开且处于激活状态，然后直接运行 main.py 文件。
