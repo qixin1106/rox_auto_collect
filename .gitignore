@@ -1,0 +1,81 @@
+# 字节码和编译文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C 扩展
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# 通常这些文件是由一个Python脚本从模板写入的，
+# 以便在PyInstaller构建exe之前注入日期/其他信息。
+*.manifest
+*.spec
+
+# 安装日志
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 单元测试和覆盖率报告
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Sphinx 文档
+docs/_build/
+
+# Jupyter Notebook 检查点
+.ipynb_checkpoints
+
+# IDE 和编辑器配置
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 虚拟环境
+venv/
+env/
+.venv/
+.env/
+.conda/ 
+
+# 操作系统和临时文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 敏感信息文件 (非常重要!)
+.env
+.env.*
+!.env.example
