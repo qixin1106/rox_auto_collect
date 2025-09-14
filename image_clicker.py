@@ -2,7 +2,6 @@ import time
 import pyautogui
 import logging
 from typing import Tuple, Optional
-import random
 
 
 
@@ -15,12 +14,12 @@ class ImageClicker:
     def __init__(self, 
                  confidence: float = 0.9,
                  double_click_delay: float = 0.1,
-                 move_duration: float = 0.3):
+                 move_duration: float = 0):
         """
         初始化配置
         :param confidence: 图像匹配置信度阈值 (0-1)
         :param double_click_delay: 双击间隔时间（秒）
-        :param move_duration: 鼠标移动动画时间（秒）
+        :param move_duration: 鼠标移动动画时间（秒），默认0是不需要轨迹
         """
         self.confidence = confidence
         self.double_click_delay = double_click_delay
@@ -59,7 +58,7 @@ class ImageClicker:
         x, y, w, h = location
         return (x + w // 2, y + h // 2)
 
-    def locate_image(self, image_path: str) -> Optional[Tuple[int, int, int, int]]:
+    def _locate_image(self, image_path: str) -> Optional[Tuple[int, int, int, int]]:
         """
         定位图像在屏幕上的位置
         :param image_path: 目标图像文件路径
@@ -78,6 +77,27 @@ class ImageClicker:
         except Exception as e:
             # logging.error(f"❌ 图像定位异常: {str(e)}")
             return None
+        
+    # 查找传入图片的中心点坐标
+    def only_find_image_center(self, image_path: str) -> Optional[Tuple[int, int]]:
+        """
+        仅查找目标图像的中心坐标，不执行点击操作
+        :param image_path: 目标图像文件路径
+        :return: 图像中心点坐标 (x, y) 或 None
+        """
+        location = self._locate_image(image_path)
+        if not location:
+            return None
+            
+        try:
+            center_coords = self._get_target_center(location)
+            x, y = center_coords
+            logging.info(f"🔍 找到目标图像中心: ({x}, {y}) - 目标: {image_path}")
+            return center_coords
+        except Exception as e:
+            logging.error(f"❌ 查找图像中心异常: {str(e)}")
+            return None
+
 
     def click_on_image(self, image_path: str) -> bool:
         """
@@ -85,7 +105,7 @@ class ImageClicker:
         :param image_path: 目标图像文件路径
         :return: 是否成功执行
         """
-        location = self.locate_image(image_path)
+        location = self._locate_image(image_path)
         if not location:
             return False
             
@@ -94,7 +114,6 @@ class ImageClicker:
             pyautogui.moveTo(x, y, duration=self.move_duration)
             time.sleep(0.1)
             pyautogui.click()
-            self.getMoveMouse()
             # logging.info(f"🖱️ 单击位置: ({x}, {y}) - 目标: {image_path}")
             return True
         except Exception as e:
@@ -107,7 +126,7 @@ class ImageClicker:
         :param image_path: 目标图像文件路径
         :return: 是否成功执行
         """
-        location = self.locate_image(image_path)
+        location = self._locate_image(image_path)
         if not location:
             return False
             
@@ -124,13 +143,13 @@ class ImageClicker:
             logging.error(f"❌ 双击操作异常: {str(e)}")
             return False
     
-    
-    # 获取随机数，作为点击之后（x,y）的一个随机坐标，每次都要随机生成不能写死，看起来比较自然
-    def getMoveMouse(self):
-        x = random.uniform(100, 200)
-        y = random.uniform(100, 200)
-        # d = random.uniform(0.1, 0.3)
-        pyautogui.moveTo(x, y)
+    def move_to_center_and_click(self, x, y, is_double_click=False):
+        pyautogui.moveTo(x, y, duration=self.move_duration)
         time.sleep(0.1)
+        pyautogui.click()
+        if is_double_click:
+            pyautogui.PAUSE = self.double_click_delay
+            pyautogui.click()
+
 
 
