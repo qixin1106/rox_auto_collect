@@ -6,6 +6,8 @@ class MathExpressionOCR:
         # 初始化 OCR 引擎
         # MacOS 上需设置 enable_mkldnn=False，否则可能报错
         self.ocr = PaddleOCR(
+            det_model_dir='models/PP-OCRv5_server_det',   # 使用 Server 检测模型
+            rec_model_dir='models/PP-OCRv5_server_rec',   # 使用 Server 识别模型
             enable_mkldnn=False,
             use_doc_orientation_classify=False,
             use_doc_unwarping=False,

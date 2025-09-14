@@ -92,7 +92,7 @@ class ImageClicker:
         try:
             x, y = self._get_target_center(location)
             pyautogui.moveTo(x, y, duration=self.move_duration)
-            time.sleep(0.3)
+            time.sleep(0.1)
             pyautogui.click()
             self.getMoveMouse()
             # logging.info(f"🖱️ 单击位置: ({x}, {y}) - 目标: {image_path}")
@@ -114,7 +114,7 @@ class ImageClicker:
         try:
             x, y = self._get_target_center(location)
             pyautogui.moveTo(x, y, duration=self.move_duration)
-            time.sleep(0.3)
+            time.sleep(0.1)
             pyautogui.click()
             pyautogui.PAUSE = self.double_click_delay
             pyautogui.click()
@@ -127,8 +127,10 @@ class ImageClicker:
     
     # 获取随机数，作为点击之后（x,y）的一个随机坐标，每次都要随机生成不能写死，看起来比较自然
     def getMoveMouse(self):
-        x = random.uniform(50, 100)
-        y = random.uniform(50, 100)
+        x = random.uniform(100, 200)
+        y = random.uniform(100, 200)
         # d = random.uniform(0.1, 0.3)
         pyautogui.moveTo(x, y)
+        time.sleep(0.1)
+
 

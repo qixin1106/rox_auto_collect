@@ -4,14 +4,14 @@ from image_clicker import ImageClicker
 from paddleocr_math_util import MathExpressionOCR
 from screen_match_capturer import ScreenRegionCapturer
 
-def random_sleep():
-    duration = random.uniform(0.1, 0.3)
-    time.sleep(duration)
+# def random_sleep():
+#     duration = random.uniform(0.1, 0.3)
+#     time.sleep(duration)
 
 def main():
     # 初始化工具对象
     print("🔨 初始化工具对象...")
-    clicker = ImageClicker(confidence=0.98)
+    clicker = ImageClicker(confidence=0.95)
     ocr_tool = MathExpressionOCR()
     capturer = ScreenRegionCapturer(confidence=0.9)
     print("✅ 初始化完成")
@@ -21,7 +21,7 @@ def main():
         found = clicker.double_click_on_image("assets/start_click.png")
         if not found:
             # print("未找到开始按钮，重试中...")
-            time.sleep(1)
+            time.sleep(0.1)
             continue
         
         print("🔍 开始【园艺】...")
@@ -52,12 +52,14 @@ def main():
                 time.sleep(1)
 
             # 点击完成按钮
-            clicker.click_on_image("assets/done.png")
-            random_sleep()
+            # clicker.click_on_image("assets/done.png")
+            # random_sleep()
 
             # 点击验证完成按钮
-            clicker.click_on_image("assets/finish.png")
-            random_sleep()
+            # clicker.click_on_image("assets/finish.png")
+            # 我发现可以直接双击完成，第一下是取消输入框，第二下正好可以点确定，能快一点
+            clicker.double_click_on_image("assets/finish.png")
+            # random_sleep()
 
 
 
