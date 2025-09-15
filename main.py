@@ -5,7 +5,7 @@ from screen_match_capturer import ScreenRegionCapturer
 from keyboard_interrupt_handler import KeyboardInterruptHandler
 
 
-VER_STRING = "v1.1.0"
+VER_STRING = "v1.1.1"
 
 def main():
     print("\n\n\n\n\n")
