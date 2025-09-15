@@ -29,6 +29,7 @@ def main():
     start_button_pos = None
     textfield_pos = None
     digit_positions = {}
+    finish_button_pos = None
 
     # 主循环：添加退出判断（仅修改此处，将while True改为监听退出信号）
     while not exit_handler.should_exit():
@@ -42,7 +43,6 @@ def main():
         try:
             x, y = start_button_pos
             clicker.move_to_center_and_click(x, y, is_double_click=True)
-            time.sleep(1)
         except Exception as e:
             print(f"❌ 点击开始按钮失败: {str(e)}")
             start_button_pos = None
@@ -92,6 +92,15 @@ def main():
 
             # 双击完成按钮
             clicker.double_click_on_image("assets/finish.png")
+                    # 首次检测并缓存开始按钮坐标
+            if finish_button_pos is None:
+                finish_button_pos = clicker.only_find_image_center("assets/finish.png")
+                if not finish_button_pos:
+                    continue
+                print(f"📌 已缓存采集完成坐标 {finish_button_pos[0], finish_button_pos[1]}")
+            x, y = finish_button_pos
+            clicker.move_to_center_and_click(x, y, is_double_click=True)
+
 
     # 程序退出时停止监听
     exit_handler.stop()
