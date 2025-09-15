@@ -35,11 +35,12 @@ class ScreenRegionCapturer:
         try:
             match = pyautogui.locateOnScreen(template_image, confidence=self.confidence, grayscale=True)
             if not match:
-                logging.warning("未找到匹配区域")
+                logging.warning("❌ 未找到验证码弹窗匹配区域")
                 return False
 
             region = self._adjust_for_retina(match)
             # 这一步是为了将截图弹窗中的位置缩小到仅题目的部分
+            # 魔数部分为按照游戏截图的分辨率计算出来的，因为是固定大小的，所以可以写死。
             region = (region[0] + 96, region[1] + 90, 217, 31)
             img = pyautogui.screenshot(region=region)
             img.save(self.output_path)
