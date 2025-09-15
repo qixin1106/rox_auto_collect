@@ -58,6 +58,9 @@ pip install paddleocr
 
 # 3. 安装 pyautogui
 pip install pyautogui
+
+# 4. 安装 pynput
+pip install pynput
 ```
 
 ```bash
