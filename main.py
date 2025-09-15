@@ -5,7 +5,12 @@ from screen_match_capturer import ScreenRegionCapturer
 from keyboard_interrupt_handler import KeyboardInterruptHandler
 
 
+VER_STRING = "v1.1.0"
+
 def main():
+    print("\n\n\n\n\n")
+    print(f"版本号：{VER_STRING}")
+    print("本脚本用于学习自动化工具开发，仅供学习交流使用")
     # 初始化工具对象
     print("🔨 初始化工具对象...")
     # 监听键盘退出信号
