@@ -79,3 +79,6 @@ desktop.ini
 .env
 .env.*
 !.env.example
+
+# 忽略临时文件（ocr临时识别目录）
+ocr_input/
