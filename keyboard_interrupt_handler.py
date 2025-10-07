@@ -18,7 +18,7 @@ class KeyboardInterruptHandler:
         if key == Key.esc:
             self._exit_flag = True
             print("\n⚠️ 检测到ESC键，准备退出程序...")
-            return False  # 停止监听
+            raise SystemExit  # 停止监听
 
     def start(self):
         """启动后台监听线程"""

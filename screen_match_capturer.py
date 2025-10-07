@@ -24,7 +24,7 @@ class ScreenRegionCapturer:
 
     def _adjust_for_retina(self, region: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
         """Retina 屏幕下将区域坐标缩放一半"""
-        return tuple(x // 2 for x in region) if self._is_retina else region
+        return (region[0] // 2, region[1] // 2, region[2] // 2, region[3] // 2) if self._is_retina else region
 
     def capture_match(self, template_image: str) -> bool:
         """
